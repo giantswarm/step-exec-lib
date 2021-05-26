@@ -21,6 +21,21 @@ def get_test_config_parser() -> configargparse.ArgParser:
         formatter_class=configargparse.ArgumentDefaultsHelpFormatter,
         add_help=True,
     )
+    steps_group = config_parser.add_mutually_exclusive_group()
+    steps_group.add_argument(
+        "--steps",
+        nargs="+",
+        help="List of steps to execute.",
+        required=False,
+        default=["all"],
+    )
+    steps_group.add_argument(
+        "--skip-steps",
+        nargs="+",
+        help="List of steps to skip.",
+        required=False,
+        default=[],
+    )
     return config_parser
 
 
