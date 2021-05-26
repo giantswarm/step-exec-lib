@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="your_app",
+    name="step-exec-lib",
     version="0.0.1",
-    author="Your Name",
-    author_email="name@giantswarm.io",
-    description="An app that does awesome stuff",
+    author="Łukasz Piątkowski",
+    author_email="lukasz@giantswarm.io",
+    description="A library that helps execute pipeline of tasks using filters and simple composition",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/giantswarm/APP_REPO_ON_GH",
+    url="https://github.com/giantswarm/step-exec-lib",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
