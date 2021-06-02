@@ -1,8 +1,8 @@
 [![build](https://github.com/giantswarm/step-exec-lib/actions/workflows/main.yml/badge.svg)](https://github.com/giantswarm/step-exec-lib/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/giantswarm/steps-exec-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/giantswarm/steps-exec-lib)
-[![PyPI Version](https://img.shields.io/pypi/v/steps-exec-lib.svg)](https://pypi.org/project/steps-exec-lib/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/steps-exec-lib.svg)](https://pypi.org/project/steps-exec-lib/)
-[![Apache License](https://img.shields.io/badge/license-apache-blue.svg)](https://pypi.org/project/steps-exec-lib/)
+[![codecov](https://codecov.io/gh/giantswarm/step-exec-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/giantswarm/step-exec-lib)
+[![PyPI Version](https://img.shields.io/pypi/v/step-exec-lib.svg)](https://pypi.org/project/step-exec-lib/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/step-exec-lib.svg)](https://pypi.org/project/step-exec-lib/)
+[![Apache License](https://img.shields.io/badge/license-apache-blue.svg)](https://pypi.org/project/step-exec-lib/)
 
 # step-exec-lib
 
