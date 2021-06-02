@@ -1,6 +1,6 @@
 # python-app-template
 
-A ready to use python app template. Based on `pipenv`. 
+A ready to use python app template. Based on `pipenv`.
 
 ## What's included
 
@@ -35,4 +35,3 @@ pipenv run pre-commit install
 ```
 
 Edit your project information in `setup.py`.
-
