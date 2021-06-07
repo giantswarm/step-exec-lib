@@ -43,7 +43,7 @@ def init_config_for_step(step: BuildStep) -> configargparse.Namespace:
     config_parser = get_test_config_parser()
     step.initialize_config(config_parser)
     config = config_parser.parse_known_args()[0]
-    config.chart_dir = "../../app-build-suite/tests/build_steps"
+    config.chart_dir = "resources"
     return config
 
 
