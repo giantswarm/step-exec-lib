@@ -4,11 +4,13 @@ from typing import List, Any
 
 logger = logging.getLogger(__name__)
 
-_GITHUB_TOKEN_ARG = "--github-token"
+_TOKEN_ARG = "--github-token"
 
 def run_and_log(args: List[str], **kwargs: Any) -> subprocess.CompletedProcess:
+    sanitized_args = sanitize_args(args)
+
     logger.info("Running command:")
-    logger.info(" ".join(sanitize_args(args)))
+    logger.info(" ".join(sanitized_args))
     if "text" not in kwargs:
         kwargs["text"] = True
     run_res = subprocess.run(args, **kwargs)  # nosec
@@ -25,8 +27,8 @@ def sanitize_args(args: List[str]) -> List[str]:
     res = []
 
     for arg in args:
-        if arg.startswith(_GITHUB_TOKEN_ARG):
-            res.append(f"{_GITHUB_TOKEN_ARG}=*****")
+        if arg.startswith(_TOKEN_ARG):
+            res.append(f"{_TOKEN_ARG}=*****")
         else:
             res.append(arg)
 
