@@ -4,7 +4,8 @@ from typing import List, Any
 
 logger = logging.getLogger(__name__)
 
-_GITHUB_TOKEN_ARG = "--github-token" # nosec
+_GITHUB_TOKEN_ARG = "--github-token"  # nosec
+
 
 def run_and_log(args: List[str], **kwargs: Any) -> subprocess.CompletedProcess:
     logger.info("ARGS:")
@@ -22,6 +23,7 @@ def run_and_log(args: List[str], **kwargs: Any) -> subprocess.CompletedProcess:
     run_res = subprocess.run(args, **kwargs)  # nosec
     logger.info(f"Command executed, exit code: {run_res.returncode}.")
     return run_res
+
 
 def sanitize_args(args: List[str]) -> List[str]:
     """
