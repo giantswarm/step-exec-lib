@@ -8,13 +8,7 @@ _GITHUB_TOKEN_ARG = "--github-token"  # nosec
 
 
 def run_and_log(args: List[str], **kwargs: Any) -> subprocess.CompletedProcess:
-    logger.info("ARGS:")
-    logger.info(" ".join(args))
-
     sanitized_args = sanitize_args(args)
-
-    logger.info("SANITIZED:")
-    logger.info(" ".join(sanitized_args))
 
     logger.info("Running command:")
     logger.info(" ".join(sanitized_args))
