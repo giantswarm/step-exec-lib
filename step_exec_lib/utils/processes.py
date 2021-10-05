@@ -16,7 +16,7 @@ def run_and_log(args: List[str], **kwargs: Any) -> subprocess.CompletedProcess:
     return run_res
 
 
-def run_and_handle_error(args: List[str], error_text: str, **kwargs: Any) -> int:
+def run_and_handle_error(args: List[str], expected_error_text: str, **kwargs: Any) -> int:
     logger.info("Running command:")
     logger.info(" ".join(args))
     if "text" not in kwargs:
@@ -30,9 +30,9 @@ def run_and_handle_error(args: List[str], error_text: str, **kwargs: Any) -> int
     except subprocess.CalledProcessError as e:
         logger.info(f"CalledProcessError: {e}.")
 
-        if error_text in e.stderr:
-            logger.info(f"Found expected error text '{error_text}', exit code: 0")
+        if expected_error_text in e.stderr:
+            logger.info(f"Found expected error text '{expected_error_text}', exit code: 0")
             return 0
         else:
-            logger.info(f"Did not find error text '{error_text}', exit code: 1")
-            return 1
+            logger.info(f"Did not find error text '{expected_error_text}', exit code: {run_res.returncode}")
+            return run_res.returncode
