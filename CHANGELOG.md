@@ -5,8 +5,15 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ## [Unreleased]
 
+## [0.1.1] 2021-10-06
+
+- added
+  - `utils.processes.run_and_handle_error()`
+- changed
+  - upgraded dependencies
+  - python 3.10 included in test platforms
+
 ## [0.1.0] 2021-06-02
 
-### added
-
-- Initial commit
+- added
+  - Initial commit
