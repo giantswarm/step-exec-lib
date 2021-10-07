@@ -23,16 +23,18 @@ def run_and_handle_error(args: List[str], expected_error_text: str, **kwargs: An
         kwargs["text"] = True
 
     try:
-        run_res = subprocess.run(args, **kwargs, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # nosec
+        run_res = subprocess.run(args, **kwargs, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)  # nosec
+
+        logger.info(run_res.stdout)
         logger.info(f"Command executed, exit code: {run_res.returncode}.")
+
         return run_res.returncode
 
     except subprocess.CalledProcessError as e:
-        logger.info(f"CalledProcessError: {e}.")
-
-        if expected_error_text in e.stderr:
+        if expected_error_text in e.stdout:
             logger.info(f"Found expected error text '{expected_error_text}', exit code: 0")
             return 0
         else:
-            logger.info(f"Did not find error text '{expected_error_text}', exit code: {run_res.returncode}")
-            return run_res.returncode
+            logger.info(e.stdout)
+            logger.info(f"CalledProcessError: {e}, exit code: {e.returncode}")
+            return e.returncode
