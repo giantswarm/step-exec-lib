@@ -23,7 +23,7 @@ def run_and_handle_error(args: List[str], expected_error_text: str, **kwargs: An
         kwargs["text"] = True
 
     try:
-        run_res = subprocess.run(args, **kwargs, check=True, stderr=subprocess.PIPE)  # nosec
+        run_res = subprocess.run(args, **kwargs, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # nosec
         logger.info(f"Command executed, exit code: {run_res.returncode}.")
         return run_res.returncode
 
