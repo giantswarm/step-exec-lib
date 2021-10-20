@@ -1,6 +1,6 @@
 import logging
 import subprocess  # nosec: we need it to invoke binaries from system
-import sys  # nosec: stream stdout and stderr to get feedback on tests
+import sys  # nosec: stream stdout to get feedback on tests
 from typing import List, Any
 
 logger = logging.getLogger(__name__)
