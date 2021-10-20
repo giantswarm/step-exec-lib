@@ -2,6 +2,8 @@
 
 Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] 2021-10-20
+
 - fixed
   - use sys.stdout in `run_and_handle_error` to get feedback from tests.
 
