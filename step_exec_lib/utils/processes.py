@@ -1,5 +1,6 @@
 import logging
 import subprocess  # nosec: we need it to invoke binaries from system
+import sys  # nosec: stream stdout and stderr to get feedback on tests
 from typing import List, Any
 
 logger = logging.getLogger(__name__)
@@ -22,7 +23,7 @@ def run_and_handle_error(args: List[str], expected_error_text: str, **kwargs: An
     if "text" not in kwargs:
         kwargs["text"] = True
 
-    run_res = subprocess.run(args, **kwargs, check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)  # nosec
+    run_res = subprocess.run(args, **kwargs, check=False, stdout=sys.stdout, stderr=sys.stderr)  # nosec
     logger.info(run_res.stdout)
 
     if run_res.returncode != 0:
