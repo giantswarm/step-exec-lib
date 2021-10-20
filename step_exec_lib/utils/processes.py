@@ -23,7 +23,7 @@ def run_and_handle_error(args: List[str], expected_error_text: str, **kwargs: An
     if "text" not in kwargs:
         kwargs["text"] = True
 
-    run_res = subprocess.run(args, **kwargs, check=False, stdout=sys.stdout, stderr=sys.stderr)  # nosec
+    run_res = subprocess.run(args, **kwargs, check=False, stdout=sys.stdout, stderr=subprocess.STDOUT)  # nosec
     logger.info(run_res.stdout)
 
     if run_res.returncode != 0:
