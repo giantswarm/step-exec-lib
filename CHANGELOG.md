@@ -2,6 +2,16 @@
 
 Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Set lowest supported python version to 3.8
+
+### Added
+
+- Add python 3.11 to test matrix
+
 ## [0.1.5] 2021-10-22
 
 - fixed:
