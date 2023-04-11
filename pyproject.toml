@@ -33,7 +33,7 @@ classifiers=[
 python = "^3.8"
 configargparse = "^1.4.1"
 gitpython = "^3.1.29"
-semver = "^2.13.0"
+semver = "^3.0.0"
 # mkdocs = {version = "^1.1.2", optional = true }
 # mkapi = {version = "^1.0.10", optional = true}
 
