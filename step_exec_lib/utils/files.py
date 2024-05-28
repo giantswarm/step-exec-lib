@@ -1,4 +1,5 @@
 """Module with file utils"""
+
 import hashlib
 import shutil
 
