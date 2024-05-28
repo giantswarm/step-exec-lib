@@ -51,7 +51,7 @@ class DummyBuildStep(BuildStep):
     def __init__(
         self,
         dummy_name: str,
-        steps_provided: Optional[Set[StepType]] = None,
+        steps_provided: Optional[set[StepType]] = None,
         fail_in_config: bool = False,
         fail_in_pre: bool = False,
         fail_in_run: bool = False,

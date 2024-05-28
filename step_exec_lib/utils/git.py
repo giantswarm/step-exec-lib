@@ -1,4 +1,5 @@
 """Module with git related utilities."""
+
 import git
 
 
