@@ -209,7 +209,7 @@ class Runner:
         self._failed_build = False
 
     @property
-    def context(self):
+    def context(self) -> Context:
         return self._context
 
     def run(self) -> None:

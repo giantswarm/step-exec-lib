@@ -123,7 +123,7 @@ class DummyBuildStep(BuildStep):
         expected_pre_run_counter: int,
         expected_run_counter: int,
         expected_cleanup_counter: int,
-    ):
+    ) -> None:
         __tracebackhide__ = True
         if self.config_counter != expected_config_counter:
             pytest.fail(f"expected config run counter is {expected_config_counter}, but was {self.config_counter}")
@@ -136,7 +136,7 @@ class DummyBuildStep(BuildStep):
 
 
 class DummyOneStepBuildFilteringPipeline(BuildStepsFilteringPipeline):
-    def __init__(self):
+    def __init__(self) -> None:
         self.step = DummyBuildStep("t1")
         super().__init__([self.step], "Dummy one step pipeline")
 
