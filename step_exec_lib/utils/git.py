@@ -39,15 +39,14 @@ class GitRepoVersionInfo:
         """
         if not self._is_repo:
             raise git.exc.InvalidGitRepositoryError()
-        tags = sorted(self._repo.tags, key=lambda t: t.commit.committed_date)
-        latest_tag = None if len(tags) == 0 else tags[-1]
-        ver = "0.0.0" if latest_tag is None else latest_tag.name
-        if strip_v_in_version and ver.startswith("v"):
-            txt_ver = ver.lstrip("v")
-            txt_ver = txt_ver.lstrip("-_.")
-        else:
-            txt_ver = ver
+        latest_tag = self._repo.git.describe()
+        if strip_v_in_version and latest_tag.startswith("v"):
+            latest_tag = latest_tag.lstrip("v")
+            latest_tag = latest_tag.lstrip("-_.")
+        latest_tag_parts = latest_tag.split("-")
         sha = self._repo.head.commit.hexsha
-        if latest_tag is not None and sha == latest_tag.commit.hexsha:
-            return txt_ver
-        return f"{txt_ver}-{sha}"
+        if not latest_tag_parts[0]:
+            return f"0.0.0-{sha}"
+        if len(latest_tag_parts) == 3 and latest_tag_parts[2].isdigit():
+            return f"{latest_tag_parts[0]}-{sha}"
+        return latest_tag_parts[0]
