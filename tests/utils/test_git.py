@@ -50,6 +50,8 @@ def test_gets_latest_tag_available_on_the_current_branch(mocker: MockFixture) ->
         # init new git repo
         file_name = os.path.join(repo_dir, "new-file")
         repo = git.Repo.init(repo_dir)
+        repo.git.config("user.email", "test@none.com")
+        repo.git.config("user.name", "test")
         # create a new file and commit it
         open(file_name, "wb").close()
         repo.index.add([file_name])
