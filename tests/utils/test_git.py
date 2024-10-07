@@ -86,3 +86,22 @@ def test_gets_latest_tag_available_on_the_current_branch(mocker: MockFixture) ->
         assert git_info.is_git_repo
         ver = git_info.get_git_version()
         assert ver == lower_tag
+
+
+def test_gets_latest_tag_available_when_no_tag(mocker: MockFixture) -> None:
+    with tempfile.TemporaryDirectory() as repo_dir:
+        # init new git repo
+        file_name = os.path.join(repo_dir, "new-file")
+        repo = git.Repo.init(repo_dir)
+        repo.git.config("user.email", "test@none.com")
+        repo.git.config("user.name", "test")
+        # create a new file and commit it
+        open(file_name, "wb").close()
+        repo.index.add([file_name])
+        repo.index.commit("initial commit")
+
+        # check if we discover correct version
+        git_info = GitRepoVersionInfo(repo_dir)
+        assert git_info.is_git_repo
+        ver = git_info.get_git_version()
+        assert ver.startswith("0.0.0-")
