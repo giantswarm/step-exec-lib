@@ -201,7 +201,6 @@ files = [
 
 [package.dependencies]
 gitdb = ">=4.0.1,<5"
-typing-extensions = {version = ">=3.7.4.3", markers = "python_version < \"3.8\""}
 
 [package.extras]
 doc = ["sphinx (==4.3.2)", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxcontrib-applehelp (>=1.0.2,<=1.0.4)", "sphinxcontrib-devhelp (==1.0.2)", "sphinxcontrib-htmlhelp (>=2.0.0,<=2.0.1)", "sphinxcontrib-qthelp (==1.0.3)", "sphinxcontrib-serializinghtml (==1.1.5)"]
@@ -220,26 +219,6 @@ files = [
 
 [package.extras]
 license = ["ukkonen"]
-
-[[package]]
-name = "importlib-metadata"
-version = "6.7.0"
-description = "Read metadata from Python packages"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "importlib_metadata-6.7.0-py3-none-any.whl", hash = "sha256:cb52082e659e97afc5dac71e79de97d8681de3aa07ff18578330904a9d18e5b5"},
-    {file = "importlib_metadata-6.7.0.tar.gz", hash = "sha256:1aaf550d4f73e5d6783e7acb77aec43d49da8017410afae93822cc9cca98c4d4"},
-]
-
-[package.dependencies]
-typing-extensions = {version = ">=3.6.4", markers = "python_version < \"3.8\""}
-zipp = ">=0.5"
-
-[package.extras]
-docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
-perf = ["ipython"]
-testing = ["flufl.flake8", "importlib-resources (>=1.3)", "packaging", "pyfakefs", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-mypy (>=0.9.1)", "pytest-perf (>=0.9.2)", "pytest-ruff"]
 
 [[package]]
 name = "iniconfig"
@@ -288,9 +267,6 @@ files = [
     {file = "platformdirs-4.0.0.tar.gz", hash = "sha256:cb633b2bcf10c51af60beb0ab06d2f1d69064b43abf4c185ca6b28865f3f9731"},
 ]
 
-[package.dependencies]
-typing-extensions = {version = ">=4.7.1", markers = "python_version < \"3.8\""}
-
 [package.extras]
 docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-autodoc-typehints (>=1.24)"]
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
@@ -305,9 +281,6 @@ files = [
     {file = "pluggy-1.2.0-py3-none-any.whl", hash = "sha256:c2fd55a7d7a3863cba1a013e4e2414658b1d07b6bc57b3919e0c63c9abb99849"},
     {file = "pluggy-1.2.0.tar.gz", hash = "sha256:d12f0c4b579b15f5e054301bb226ee85eeeba08ffec228092f8defbaa3a4c4b3"},
 ]
-
-[package.dependencies]
-importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
 dev = ["pre-commit", "tox"]
@@ -327,7 +300,6 @@ files = [
 [package.dependencies]
 cfgv = ">=2.0.0"
 identify = ">=1.0.0"
-importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 nodeenv = ">=0.11.1"
 pyyaml = ">=5.1"
 virtualenv = ">=20.10.0"
@@ -365,7 +337,6 @@ files = [
 [package.dependencies]
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
-importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 iniconfig = "*"
 packaging = "*"
 pluggy = ">=0.12,<2.0"
@@ -394,17 +365,17 @@ testing = ["fields", "hunter", "process-tests", "pytest-xdist", "six", "virtuale
 
 [[package]]
 name = "pytest-mock"
-version = "3.11.1"
+version = "3.14.0"
 description = "Thin-wrapper around the mock package for easier use with pytest"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pytest-mock-3.11.1.tar.gz", hash = "sha256:7f6b125602ac6d743e523ae0bfa71e1a697a2f5534064528c6ff84c2f7c2fc7f"},
-    {file = "pytest_mock-3.11.1-py3-none-any.whl", hash = "sha256:21c279fff83d70763b05f8874cc9cfb3fcacd6d354247a976f9529d19f9acf39"},
+    {file = "pytest-mock-3.14.0.tar.gz", hash = "sha256:2719255a1efeceadbc056d6bf3df3d1c5015530fb40cf347c0f9afac88410bd0"},
+    {file = "pytest_mock-3.14.0-py3-none-any.whl", hash = "sha256:0b72c38033392a5f4621342fe11e9219ac11ec9d375f8e2a0c164539e0d70f6f"},
 ]
 
 [package.dependencies]
-pytest = ">=5.0"
+pytest = ">=6.2.5"
 
 [package.extras]
 dev = ["pre-commit", "pytest-asyncio", "tox"]
@@ -534,13 +505,11 @@ cachetools = ">=5.3.1"
 chardet = ">=5.1"
 colorama = ">=0.4.6"
 filelock = ">=3.12.2"
-importlib-metadata = {version = ">=6.7", markers = "python_version < \"3.8\""}
 packaging = ">=23.1"
 platformdirs = ">=3.9.1"
 pluggy = ">=1.2"
 pyproject-api = ">=1.5.3"
 tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
-typing-extensions = {version = ">=4.7.1", markers = "python_version < \"3.8\""}
 virtualenv = ">=20.24.1"
 
 [package.extras]
@@ -562,17 +531,6 @@ files = [
 tox = ">=2.0"
 
 [[package]]
-name = "typing-extensions"
-version = "4.7.1"
-description = "Backported and Experimental Type Hints for Python 3.7+"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "typing_extensions-4.7.1-py3-none-any.whl", hash = "sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36"},
-    {file = "typing_extensions-4.7.1.tar.gz", hash = "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"},
-]
-
-[[package]]
 name = "virtualenv"
 version = "20.26.2"
 description = "Virtual Python Environment builder"
@@ -586,29 +544,13 @@ files = [
 [package.dependencies]
 distlib = ">=0.3.7,<1"
 filelock = ">=3.12.2,<4"
-importlib-metadata = {version = ">=6.6", markers = "python_version < \"3.8\""}
 platformdirs = ">=3.9.1,<5"
 
 [package.extras]
 docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.2,!=7.3)", "sphinx-argparse (>=0.4)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
 test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=23.1)", "pytest (>=7.4)", "pytest-env (>=0.8.2)", "pytest-freezer (>=0.4.8)", "pytest-mock (>=3.11.1)", "pytest-randomly (>=3.12)", "pytest-timeout (>=2.1)", "setuptools (>=68)", "time-machine (>=2.10)"]
 
-[[package]]
-name = "zipp"
-version = "3.15.0"
-description = "Backport of pathlib-compatible object wrapper for zip files"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "zipp-3.15.0-py3-none-any.whl", hash = "sha256:48904fc76a60e542af151aded95726c1a5c34ed43ab4134b597665c86d7ad556"},
-    {file = "zipp-3.15.0.tar.gz", hash = "sha256:112929ad649da941c23de50f356a2b5570c954b65150642bccdd66bf194d224b"},
-]
-
-[package.extras]
-docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
-testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
-
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.7"
-content-hash = "6cfab425e0de03c9f18dadb6ef78f99912f99220a3ef354b1f19183333e816a9"
+python-versions = "^3.9"
+content-hash = "8f8506e18cb7451dfc28b81b17a043808038dfcdec7a2010334f94c9858c69b7"
