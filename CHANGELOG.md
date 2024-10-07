@@ -6,6 +6,10 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ### Changed
 
+## [0.2.1] 2024-10-07
+
+- fix: git tag detection in `utils/git` now checks only the last tag reachable on the current branch
+
 ## [0.2.0] 2024-05-28
 
 - dependency updates
