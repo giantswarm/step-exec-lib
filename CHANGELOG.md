@@ -4,6 +4,8 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ## [Unreleased]
 
+## [0.2.3] 2024-10-08
+
 ### Changed
 
 - git tag discovery uses now both annotated and unannotated tags
