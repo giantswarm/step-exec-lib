@@ -19,6 +19,7 @@ from step_exec_lib.utils.git import GitRepoVersionInfo
         ([{"name": "v-0.0.1", "sha": "012"}], "123", "0.0.1-123"),
         ([{"name": "v_0.0.1", "sha": "012"}], "123", "0.0.1-123"),
         ([{"name": "v.0.0.1", "sha": "012"}], "123", "0.0.1-123"),
+        ([{"name": "v0.0.1", "sha": "abc"}], "def", "0.0.1-def"),
     ],
 )
 def test_git_version(

@@ -50,6 +50,6 @@ class GitRepoVersionInfo:
         latest_tag_parts = latest_tag.split("-")
         if not latest_tag_parts[0]:
             return f"0.0.0-{sha}"
-        if len(latest_tag_parts) == 3 and latest_tag_parts[2].isdigit():
+        if len(latest_tag_parts) == 3 and latest_tag_parts[2] != "":
             return f"{latest_tag_parts[0]}-{sha}"
         return latest_tag_parts[0]
