@@ -41,7 +41,7 @@ class GitRepoVersionInfo:
             raise git.exc.InvalidGitRepositoryError()
         sha = self._repo.head.commit.hexsha
         try:
-            latest_tag = self._repo.git.describe()
+            latest_tag = self._repo.git.describe("--tags")
         except git.exc.GitCommandError:
             return f"0.0.0-{sha}"
         if strip_v_in_version and latest_tag.startswith("v"):
