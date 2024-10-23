@@ -18,17 +18,17 @@ classifiers = [
   'Intended Audience :: Developers',
   'Programming Language :: Python',
   'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.9',
   'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
+  'Programming Language :: Python :: 3.13',
   'Programming Language :: Python :: Implementation :: CPython',
   'Operating System :: POSIX :: Linux',
   'License :: OSI Approved :: Apache Software License',
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 configargparse = "^1.4.1"
 gitpython = "^3.1.41"
 semver = "^3.0.0"
@@ -41,14 +41,13 @@ pytest = "*"
 pytest-cov = "*"
 pytest-mock = "*"
 tox = "^4.0.0"
-tox-pyenv = "^1.1.0"
 
 # [tool.poetry.extras]
 # docs = ["mkdocs", "mkapi"]
 
 [tool.black]
 line-length = 120
-target-version = ['py39', 'py310', 'py311', 'py312']
+target-version = ['py310', 'py311', 'py312', 'py313']
 include = '\.pyi?$'
 exclude = '''
 /(
