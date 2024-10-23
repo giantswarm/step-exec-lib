@@ -4,6 +4,10 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ## [Unreleased]
 
+## 0.3.1 2024-10-23
+
+- drop support for python 3.9, add support for python 3.13
+
 ## [0.2.4] 2024-10-08
 
 - bug fix: wrong discovery of the commit hash
