@@ -4,6 +4,8 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ## [Unreleased]
 
+- remove `utils/git.py` as unrelated to this project
+
 ## 0.3.1 2024-10-23
 
 - drop support for python 3.9, add support for python 3.13
