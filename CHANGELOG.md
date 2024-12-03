@@ -4,6 +4,8 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Se
 
 ## [Unreleased]
 
+## 0.4.1 2024-12-03
+
 - remove `utils/git.py` as unrelated to this project
 
 ## 0.3.1 2024-10-23
