@@ -67,7 +67,7 @@ jobs:
       - name: Run pytest
         run: poetry run python -m pytest --cov=step_exec_lib/ --cov-report=xml --log-cli-level=info tests/
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5.2.0
+        uses: codecov/codecov-action@v5.3.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: .coverage/coverage.xml
