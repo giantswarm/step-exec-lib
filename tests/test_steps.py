@@ -116,7 +116,7 @@ class TestRunner:
         runner = Runner(cast(configargparse.Namespace, None), [test_step])
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             runner.run()
-        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e is SystemExit
         assert pytest_wrapped_e.value.code == 1
         test_step.assert_run_counters(0, 1, 0, 0)
 
@@ -134,5 +134,5 @@ class TestRunner:
         test_step2.assert_run_counters(0, 1, 0, 1)
         assert test_step1.cleanup_informed_about_failure
         assert test_step2.cleanup_informed_about_failure
-        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e is SystemExit
         assert pytest_wrapped_e.value.code == 1
