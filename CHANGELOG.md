@@ -1,8 +1,14 @@
 # Changelog
 
-Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## 0.4.2 2024-12-22
+
+- add testing for python 3.14
+- switch project management tool from poetry to uv
 
 ## 0.4.1 2024-12-03
 
