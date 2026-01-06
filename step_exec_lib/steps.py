@@ -104,7 +104,9 @@ class BuildStep(ABC):
         """
         files.assert_binary_present_in_path(self.name, bin_name)
 
-    def _assert_version_in_range(self, app_name: str, version: str, min_version: str, max_version_exc: str) -> None:
+    def _assert_version_in_range(
+        self, app_name: str, version: str, min_version: str, max_version_exc: str
+    ) -> None:
         """
         Checks if the given app_name with a string version falls in between specified min and max
         versions (min_version <= version < max_version). Raises ValidationError.
@@ -114,7 +116,9 @@ class BuildStep(ABC):
         :param max_version_exc: proper semver version string to check for (excludes this version)
         :return:
         """
-        abs_config.assert_version_in_range(self.name, app_name, version, min_version, max_version_exc)
+        abs_config.assert_version_in_range(
+            self.name, app_name, version, min_version, max_version_exc
+        )
 
 
 class BuildStepsFilteringPipeline(BuildStep):
@@ -155,10 +159,14 @@ class BuildStepsFilteringPipeline(BuildStep):
             build_step.initialize_config(self._config_parser_group)
 
     def pre_run(self, config: argparse.Namespace) -> None:
-        self._all_pre_runs_skipped = self._iterate_steps(config, "pre-run", lambda step: step.pre_run(config))
+        self._all_pre_runs_skipped = self._iterate_steps(
+            config, "pre-run", lambda step: step.pre_run(config)
+        )
 
     def run(self, config: argparse.Namespace, context: Context) -> None:
-        self._all_runs_skipped = self._iterate_steps(config, "build", lambda step: step.run(config, context))
+        self._all_runs_skipped = self._iterate_steps(
+            config, "build", lambda step: step.run(config, context)
+        )
 
     def cleanup(
         self,
@@ -189,10 +197,14 @@ class BuildStepsFilteringPipeline(BuildStep):
                 try:
                     step_function(step)
                 except Error as e:
-                    logger.error(f"Error when running {stage} step for {step.name}: {e.msg}")
+                    logger.error(
+                        f"Error when running {stage} step for {step.name}: {e.msg}"
+                    )
                     raise
             else:
-                logger.info(f"Skipping {stage} step for {step.name} as it was not configured to run.")
+                logger.info(
+                    f"Skipping {stage} step for {step.name} as it was not configured to run."
+                )
         return all_steps_skipped
 
 
@@ -233,7 +245,9 @@ class Runner:
             for step in self._steps:
                 step.run(self._config, self._context)
         except Error as e:
-            logger.error(f"Error when running build: {e}. No further build steps will be performed, moving to cleanup.")
+            logger.error(
+                f"Error when running build: {e}. No further build steps will be performed, moving to cleanup."
+            )
             self._failed_build = True
 
     def run_cleanup(self) -> None:

@@ -25,7 +25,9 @@ class TestBuildStep:
         bs = DummyBuildStep("bs1")
         assert bs.name == "DummyBuildStep"
 
-    def test_raises_own_exception_when_binary_not_found(self, monkeypatch: pytest.MonkeyPatch) -> None:
+    def test_raises_own_exception_when_binary_not_found(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
         fake_bin = "fake.bin"
 
         def check_bin(name: str) -> None:

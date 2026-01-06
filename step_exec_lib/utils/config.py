@@ -10,12 +10,18 @@ def get_config_attribute_from_cmd_line_option(cmd_line_opt: str) -> str:
     return cmd_line_opt.lstrip("-").replace("-", "_")
 
 
-def get_config_value_by_cmd_line_option(config: argparse.Namespace, cmd_line_opt: str) -> Any:
+def get_config_value_by_cmd_line_option(
+    config: argparse.Namespace, cmd_line_opt: str
+) -> Any:
     return getattr(config, get_config_attribute_from_cmd_line_option(cmd_line_opt))
 
 
 def assert_version_in_range(
-    check_source_name: str, app_name: str, version: str, min_version: str, max_version_exc: str
+    check_source_name: str,
+    app_name: str,
+    version: str,
+    min_version: str,
+    max_version_exc: str,
 ) -> None:
     """
     Checks if the given app_name with a string version falls in between specified min and max
