@@ -14,8 +14,6 @@ from step_exec_lib.utils.processes import run_and_handle_error
         (["bash", "-c", "echo 'wrooong' 1>&2 && false"], "ooo", 0),
     ],
 )
-def test_run_and_handle_error(
-    args: List[str], expected_error: str, exit_code: int
-) -> None:
+def test_run_and_handle_error(args: List[str], expected_error: str, exit_code: int) -> None:
     res = run_and_handle_error(args, expected_error)
     assert res.returncode == exit_code
