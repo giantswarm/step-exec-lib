@@ -261,7 +261,9 @@ class Runner:
                 for step in self._steps:
                     step.run(self._config, self._context)
             except Error as e:
-                logger.error(f"Error when running build: {e}. No further build steps will be performed, moving to cleanup.")
+                logger.error(
+                    f"Error when running build: {e}. No further build steps will be performed, moving to cleanup."
+                )
                 self._failed_build = True
 
     def run_cleanup(self) -> None:
