@@ -5,6 +5,13 @@ Based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), following
 
 ## [Unreleased]
 
+## 0.5.0 2026-05-25
+
+### Added
+
+- `--keep-going` flag support in `Runner` and `BuildStepsFilteringPipeline`. When set, all steps in a phase run before the pipeline exits, accumulating errors into a summary rather than stopping on the first failure. Default behaviour (fail fast) is unchanged.
+- `AggregatedError` in `step_exec_lib.errors` — subclasses `Error`; holds a list of `Error` instances collected during a keep-going run. Caught transparently by existing `except Error` sites.
+
 ## 0.4.2 2024-12-22
 
 - add testing for python 3.14

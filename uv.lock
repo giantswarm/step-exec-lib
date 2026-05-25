@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.10, <4"
 
 [[package]]
@@ -351,7 +351,7 @@ wheels = [
 
 [[package]]
 name = "step-exec-lib"
-version = "0.4.2"
+version = "0.5.0"
 source = { editable = "." }
 dependencies = [
     { name = "configargparse" },

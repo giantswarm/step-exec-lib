@@ -1,4 +1,7 @@
 """Errors returned by step-exec-lib"""
+from __future__ import annotations
+
+from typing import List
 
 
 class Error(Exception):
@@ -43,3 +46,22 @@ class ValidationError(Error):
 
     def __str__(self) -> str:
         return f"Source: '{self.source}', message: {self.msg}."
+
+
+class AggregatedError(Error):
+    """
+    Holds multiple errors collected when running with --keep-going. Subclasses Error so
+    existing `except Error` catch sites work without modification.
+    """
+
+    errors: List[Error]
+
+    def __init__(self, errors: List[Error]):
+        super().__init__(f"{len(errors)} errors collected")
+        self.errors = errors
+
+    def __str__(self) -> str:
+        lines = [f"{len(self.errors)} errors collected:"]
+        for i, e in enumerate(self.errors, 1):
+            lines.append(f"  {i}. {e}")
+        return "\n".join(lines)
