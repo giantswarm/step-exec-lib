@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Tuple, cast
 import configargparse
 import pytest
 
-from step_exec_lib.errors import ValidationError, Error
+from step_exec_lib.errors import ValidationError, Error, AggregatedError
 from step_exec_lib.steps import Runner, BuildStep
 from step_exec_lib.types import STEP_ALL, StepType
 from tests.dummy_build_step import (
@@ -136,3 +136,93 @@ class TestRunner:
         assert test_step2.cleanup_informed_about_failure
         assert pytest_wrapped_e.typename == "SystemExit"
         assert pytest_wrapped_e.value.code == 1
+
+
+def _make_config(keep_going: bool = False) -> configargparse.Namespace:
+    config = configargparse.Namespace()
+    config.steps = ["all"]
+    config.skip_steps = []
+    config.keep_going = keep_going
+    return config
+
+
+class TestRunnerKeepGoing:
+    def test_pre_run_runs_all_steps_before_exiting(self) -> None:
+        step1 = DummyBuildStep("t1", fail_in_pre=True)
+        step2 = DummyBuildStep("t2", fail_in_pre=True)
+        runner = Runner(_make_config(keep_going=True), [step1, step2])
+
+        with pytest.raises(SystemExit) as exc:
+            runner.run()
+
+        assert exc.value.code == 1
+        step1.assert_run_counters(0, 1, 0, 0)
+        step2.assert_run_counters(0, 1, 0, 0)
+
+    def test_pre_run_single_failure_still_exits(self) -> None:
+        step1 = DummyBuildStep("t1", fail_in_pre=True)
+        step2 = DummyBuildStep("t2")
+        runner = Runner(_make_config(keep_going=True), [step1, step2])
+
+        with pytest.raises(SystemExit) as exc:
+            runner.run()
+
+        assert exc.value.code == 1
+        step1.assert_run_counters(0, 1, 0, 0)
+        step2.assert_run_counters(0, 1, 0, 0)
+
+    def test_build_runs_all_steps_on_failure(self) -> None:
+        step1 = DummyBuildStep("t1", fail_in_run=True)
+        step2 = DummyBuildStep("t2", fail_in_run=True)
+        step3 = DummyBuildStep("t3")
+        runner = Runner(_make_config(keep_going=True), [step1, step2, step3])
+
+        with pytest.raises(SystemExit) as exc:
+            runner.run()
+
+        assert exc.value.code == 1
+        step1.assert_run_counters(0, 1, 1, 1)
+        step2.assert_run_counters(0, 1, 1, 1)
+        step3.assert_run_counters(0, 1, 1, 1)
+
+    def test_cleanup_still_runs_for_all_steps(self) -> None:
+        step1 = DummyBuildStep("t1", fail_in_run=True)
+        step2 = DummyBuildStep("t2")
+        runner = Runner(_make_config(keep_going=True), [step1, step2])
+
+        with pytest.raises(SystemExit):
+            runner.run()
+
+        assert step1.cleanup_informed_about_failure
+        assert step2.cleanup_informed_about_failure
+
+
+class TestBuildPipelineKeepGoing:
+    def test_iterate_runs_all_steps_and_raises_aggregated(self) -> None:
+        bsp = DummyTwoStepBuildFilteringPipeline(fail_in_pre=True)
+        config = _make_config(keep_going=True)
+
+        with pytest.raises(AggregatedError) as exc:
+            bsp.pre_run(config)
+
+        assert len(exc.value.errors) == 2
+        bsp.step1.assert_run_counters(0, 1, 0, 0)
+        bsp.step2.assert_run_counters(0, 1, 0, 0)
+
+    def test_iterate_single_failure_raises_original_error(self) -> None:
+        bsp = DummyTwoStepBuildFilteringPipeline(fail_in_pre=True)
+        bsp.step2.fail_in_pre = False
+        config = _make_config(keep_going=True)
+
+        with pytest.raises(Error) as exc:
+            bsp.pre_run(config)
+
+        assert not isinstance(exc.value, AggregatedError)
+
+    def test_aggregated_error_str_contains_all_messages(self) -> None:
+        errors = [Error("first problem"), Error("second problem")]
+        agg = AggregatedError(errors)
+        text = str(agg)
+        assert "first problem" in text
+        assert "second problem" in text
+        assert "2 errors" in text

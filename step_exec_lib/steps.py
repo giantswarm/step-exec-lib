@@ -8,7 +8,7 @@ from typing import List, Callable, Set, cast, Optional
 
 import configargparse
 
-from step_exec_lib.errors import Error
+from step_exec_lib.errors import Error, AggregatedError
 from step_exec_lib.types import Context, StepType, STEP_ALL
 from step_exec_lib.utils import config as abs_config
 from step_exec_lib.utils import files
@@ -179,6 +179,8 @@ class BuildStepsFilteringPipeline(BuildStep):
         step_function: Callable[[BuildStep], None],
     ) -> bool:
         all_steps_skipped = True
+        keep_going = getattr(config, "keep_going", False)
+        collected: List[Error] = []
         for step in self._pipeline:
             execute_all = STEP_ALL in config.steps
             is_requested_step = any(s in step.steps_provided for s in config.steps)
@@ -190,9 +192,14 @@ class BuildStepsFilteringPipeline(BuildStep):
                     step_function(step)
                 except Error as e:
                     logger.error(f"Error when running {stage} step for {step.name}: {e.msg}")
-                    raise
+                    if keep_going:
+                        collected.append(e)
+                    else:
+                        raise
             else:
                 logger.info(f"Skipping {stage} step for {step.name} as it was not configured to run.")
+        if collected:
+            raise collected[0] if len(collected) == 1 else AggregatedError(collected)
         return all_steps_skipped
 
 
@@ -207,6 +214,7 @@ class Runner:
         self._steps = steps
         self._context: Context = {}
         self._failed_build = False
+        self._keep_going: bool = getattr(config, "keep_going", False)
 
     @property
     def context(self) -> Context:
@@ -221,20 +229,42 @@ class Runner:
             sys.exit(1)
 
     def run_pre_steps(self) -> None:
-        try:
+        if self._keep_going:
+            collected: List[Error] = []
             for step in self._steps:
-                step.pre_run(self._config)
-        except Error as e:
-            logger.error(f"Error when running pre-steps: {e}. Exiting.")
-            sys.exit(1)
+                try:
+                    step.pre_run(self._config)
+                except Error as e:
+                    logger.error(f"Error when running pre-steps: {e}")
+                    collected.append(e)
+            if collected:
+                logger.error(f"Pre-run failed with {len(collected)} error(s). Exiting.")
+                sys.exit(1)
+        else:
+            try:
+                for step in self._steps:
+                    step.pre_run(self._config)
+            except Error as e:
+                logger.error(f"Error when running pre-steps: {e}. Exiting.")
+                sys.exit(1)
 
     def run_build_steps(self) -> None:
-        try:
+        if self._keep_going:
             for step in self._steps:
-                step.run(self._config, self._context)
-        except Error as e:
-            logger.error(f"Error when running build: {e}. No further build steps will be performed, moving to cleanup.")
-            self._failed_build = True
+                try:
+                    step.run(self._config, self._context)
+                except Error as e:
+                    logger.error(f"Error when running build: {e}. Continuing to next build step.")
+                    self._failed_build = True
+        else:
+            try:
+                for step in self._steps:
+                    step.run(self._config, self._context)
+            except Error as e:
+                logger.error(
+                    f"Error when running build: {e}. No further build steps will be performed, moving to cleanup."
+                )
+                self._failed_build = True
 
     def run_cleanup(self) -> None:
         for step in self._steps:
