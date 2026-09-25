@@ -35,7 +35,7 @@ dependencies = [
 Repository = "https://github.com/giantswarm/step-exec-lib"
 
 [dependency-groups]
-dev = ["pre-commit", "pytest", "pytest-cov", "pytest-mock", "tox>=4.0.0,<5"]
+dev = ["pre-commit", "pytest>=9.0.3", "pytest-cov", "pytest-mock", "tox>=4.0.0,<5"]
 
 [tool.hatch.build.targets.sdist]
 include = ["step_exec_lib/**/*.py", "CHANGELOG.md", "DCO"]
